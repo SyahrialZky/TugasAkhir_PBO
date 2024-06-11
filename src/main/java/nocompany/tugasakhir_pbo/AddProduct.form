@@ -34,12 +34,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" min="-2" pref="271" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="fieldNama" alignment="0" max="32767" attributes="0"/>
-                      <Component id="fieldHarga" alignment="0" max="32767" attributes="0"/>
-                      <Component id="fieldJumlah" alignment="0" max="32767" attributes="0"/>
-                      <Component id="submitButton" alignment="0" pref="353" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="fieldHarga" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="fieldJumlah" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="submitButton" linkSize="1" alignment="0" pref="353" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -48,8 +45,9 @@
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="fieldNama" linkSize="1" alignment="0" min="-2" pref="980" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,7 +70,7 @@
               <Component id="fieldHarga" min="-2" pref="48" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Component id="submitButton" min="-2" pref="45" max="-2" attributes="0"/>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace pref="325" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
