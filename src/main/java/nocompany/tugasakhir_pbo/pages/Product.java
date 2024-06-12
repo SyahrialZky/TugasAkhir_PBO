@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import nocompany.tugasakhir_pbo.AddStock;
 
@@ -22,13 +23,32 @@ public class Product extends javax.swing.JFrame {
      * Creates new form Product
      */
     
-    
+    private boolean keepRefreshing = true;
     public Product() {
         initComponents();
         loadDataToTable();
         
         
         
+    }
+     private void startAutoRefresh() {
+        Thread refreshThread = new Thread(() -> {
+            while (keepRefreshing) {
+                try {
+                    SwingUtilities.invokeAndWait(this::loadDataToTable);
+                    Thread.sleep(5000); // Refresh every 5 seconds
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        refreshThread.start();
+    }
+     
+         @Override
+    public void dispose() {
+        keepRefreshing = false; // Stop the refresh thread when the window is closed
+        super.dispose();
     }
        
 
