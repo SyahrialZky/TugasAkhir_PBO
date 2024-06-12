@@ -131,10 +131,12 @@ public class Product extends javax.swing.JFrame {
     private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductButtonActionPerformed
         // TODO add your handling code here:
         new AddProduct().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_addProductButtonActionPerformed
 
     private void updateStockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStockButtonActionPerformed
         new AddStock().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_updateStockButtonActionPerformed
 
     /**
