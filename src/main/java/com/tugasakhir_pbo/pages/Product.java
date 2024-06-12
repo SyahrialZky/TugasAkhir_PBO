@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package nocompany.tugasakhir_pbo.pages;
+package com.tugasakhir_pbo.pages;
 
 /**
  *
@@ -173,7 +173,7 @@ private void loadDataToTable(){
     model.setRowCount(0);
 
     String query = "SELECT * FROM item";
-    try (Connection connection = koneksi.getConnection();
+    try (Connection connection = com.tugasakhir_pbo.db.connection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
         ResultSet resultSet = statement.executeQuery()){
         int no = 1;

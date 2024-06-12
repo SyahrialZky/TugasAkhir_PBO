@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package nocompany.tugasakhir_pbo.pages;
+package com.tugasakhir_pbo.pages;
 
 
 import java.sql.Connection;
@@ -137,7 +137,7 @@ public class AddProduct extends javax.swing.JFrame {
         int jumlah = Integer.parseInt(fieldJumlah.getText());
         double harga = Double.parseDouble(fieldHarga.getText());
         
-        try (Connection conn = koneksi.getConnection()) {
+        try (Connection conn = com.tugasakhir_pbo.db.connection.getConnection();) {
             // Buat SQL query
             String sql = "INSERT INTO item (item_name, jumlah, price) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);

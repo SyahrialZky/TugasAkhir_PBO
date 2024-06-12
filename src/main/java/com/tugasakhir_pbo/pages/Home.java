@@ -1,4 +1,4 @@
-package nocompany.tugasakhir_pbo.pages;
+package com.tugasakhir_pbo.pages;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -81,7 +81,7 @@ public class Home extends javax.swing.JFrame {
         availableItemsPanel.setBorder(BorderFactory.createTitledBorder("Available Items"));
 
         try {
-            Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
+            Connection connection = com.tugasakhir_pbo.db.connection.getConnection();
             String query = "SELECT name, price FROM item";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
