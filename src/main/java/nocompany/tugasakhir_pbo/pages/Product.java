@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import nocompany.tugasakhir_pbo.AddStock;
 
 public class Product extends javax.swing.JFrame {
 
@@ -45,6 +46,10 @@ public class Product extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         addProductButton = new javax.swing.JButton();
         updateStockButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +83,17 @@ public class Product extends javax.swing.JFrame {
                 updateStockButtonActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("Home");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Items");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("History");
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,6 +178,10 @@ public class Product extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProductButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableProduct;
     private javax.swing.JButton updateStockButton;
@@ -172,7 +192,7 @@ public class Product extends javax.swing.JFrame {
         model.setRowCount(0);
 
         String query = "SELECT * FROM item";
-        try (Connection connection = koneksi.getConnection();
+        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
             int no = 1;
