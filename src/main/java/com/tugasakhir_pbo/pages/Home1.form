@@ -46,20 +46,29 @@
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="jMenuItemHome">
           <Properties>
             <Property name="text" type="java.lang.String" value="Home"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHomeActionPerformed"/>
+          </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jMenuItemItems">
           <Properties>
             <Property name="text" type="java.lang.String" value="Items"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemItemsActionPerformed"/>
+          </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
+        <Menu class="javax.swing.JMenu" name="jMenuItemHistory">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Histyory"/>
+            <Property name="text" type="java.lang.String" value="History"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemHistoryActionPerformed"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>
@@ -132,7 +141,13 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD:src/main/java/nocompany/tugasakhir_pbo/pages/Home1.form
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+=======
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+>>>>>>> 21ca68fa1c67fe1f100f09967fc2e7cf59a722e0:src/main/java/com/tugasakhir_pbo/pages/Home1.form
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
@@ -301,7 +316,11 @@
                       <Component id="jButton1" pref="179" max="32767" attributes="0"/>
                       <Component id="jTextField1" max="32767" attributes="0"/>
                       <Component id="jTextField2" max="32767" attributes="0"/>
+<<<<<<< HEAD:src/main/java/nocompany/tugasakhir_pbo/pages/Home1.form
+                      <Component id="jTextField3" pref="179" max="32767" attributes="0"/>
+=======
                       <Component id="jTextField3" max="32767" attributes="0"/>
+>>>>>>> 21ca68fa1c67fe1f100f09967fc2e7cf59a722e0:src/main/java/com/tugasakhir_pbo/pages/Home1.form
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>

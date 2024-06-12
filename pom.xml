@@ -9,7 +9,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+<<<<<<< HEAD
+        <exec.mainClass>nocompany.tugasakhir_pbo.pages.Login</exec.mainClass>
+=======
         <exec.mainClass>com.tugasakhir_pbo.pages.Product</exec.mainClass>
+>>>>>>> 21ca68fa1c67fe1f100f09967fc2e7cf59a722e0
     </properties>
   
   
