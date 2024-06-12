@@ -118,7 +118,7 @@ public class Product extends javax.swing.JFrame {
     }//GEN-LAST:event_addProductButtonActionPerformed
 
     private void updateStockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStockButtonActionPerformed
-        new AddStock().setVisible(true);
+//        new AddStock().setVisible(true);
     }//GEN-LAST:event_updateStockButtonActionPerformed
 
     /**
@@ -172,7 +172,7 @@ public class Product extends javax.swing.JFrame {
         model.setRowCount(0);
 
         String query = "SELECT * FROM item";
-        try (Connection connection = koneksi.getConnection();
+        try (Connection connection = com.tugasakhir_pbo.db.connection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
             int no = 1;
@@ -190,7 +190,7 @@ public class Product extends javax.swing.JFrame {
     }
  private void updateStock(int itemId, int newStock) throws SQLException {
         String sqlUpdateStock = "UPDATE item SET jumlah = ? WHERE item_id = ?";
-        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
+        try (Connection connection = com.tugasakhir_pbo.db.connection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sqlUpdateStock)) {
             statement.setInt(1, newStock);
             statement.setInt(2, itemId);

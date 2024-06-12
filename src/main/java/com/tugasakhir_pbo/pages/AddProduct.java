@@ -139,7 +139,7 @@ public class AddProduct extends javax.swing.JFrame {
         int jumlah = Integer.parseInt(fieldJumlah.getText());
         double harga = Double.parseDouble(fieldHarga.getText());
         
-        try (Connection conn = nocompany.tugasakhir_pbo.db.connection.getConnection()) {
+        try (Connection conn = com.tugasakhir_pbo.db.connection.getConnection()) {
             // Add item to item table
             String sqlItem = "INSERT INTO item (name, qty, price) VALUES (?, ?, ?)";
             PreparedStatement pstmtItem = conn.prepareStatement(sqlItem, Statement.RETURN_GENERATED_KEYS); // Request generated key
