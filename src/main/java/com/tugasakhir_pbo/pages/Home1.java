@@ -12,6 +12,11 @@ import javax.swing.event.DocumentListener;
  *
  * @author hp
  */
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class Home1 extends javax.swing.JFrame {
 
     List<String> addedItems = new ArrayList<>();
@@ -67,10 +72,10 @@ public class Home1 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         addItemsBtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuItemHome = new javax.swing.JMenu();
+        jMenuItemItems = new javax.swing.JMenu();
+        jMenuItemHistory = new javax.swing.JMenu();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -218,6 +223,15 @@ public class Home1 extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+<<<<<<< HEAD:src/main/java/nocompany/tugasakhir_pbo/pages/Home1.java
+        jMenuItemHome.setText("Home");
+        jMenuItemHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHomeActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenuItemHome);
+=======
         addItemsBtn.setText("Tambah");
         addItemsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,6 +246,7 @@ public class Home1 extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton2.setText("Home");
@@ -248,6 +263,27 @@ public class Home1 extends javax.swing.JFrame {
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
+=======
+        jMenu1.setText("Home");
+        jMenuBar1.add(jMenu1);
+>>>>>>> 21ca68fa1c67fe1f100f09967fc2e7cf59a722e0:src/main/java/com/tugasakhir_pbo/pages/Home1.java
+
+        jMenuItemItems.setText("Items");
+        jMenuItemItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemItemsActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenuItemItems);
+
+        jMenuItemHistory.setText("History");
+        jMenuItemHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHistoryActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenuItemHistory);
+>>>>>>> 825784f60ebf2641838eb3ad1a6069ca0785686c
 
         jButton5.setText("History");
         jButton5.setBorder(null);
@@ -306,6 +342,7 @@ public class Home1 extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -326,11 +363,66 @@ public class Home1 extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))))
+=======
+                .addGap(574, 574, 574)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addItemsBtn)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+<<<<<<< HEAD:src/main/java/nocompany/tugasakhir_pbo/pages/Home1.java
+                .addGap(0, 0, 0)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+=======
+                .addGap(6, 6, 6)
+>>>>>>> 21ca68fa1c67fe1f100f09967fc2e7cf59a722e0:src/main/java/com/tugasakhir_pbo/pages/Home1.java
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+>>>>>>> 825784f60ebf2641838eb3ad1a6069ca0785686c
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD:src/main/java/nocompany/tugasakhir_pbo/pages/Home1.java
+    private void jMenuItemHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHomeActionPerformed
+        Home1 home = new Home1();
+        home.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItemHomeActionPerformed
+
+    private void jMenuItemItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemItemsActionPerformed
+        Product product = new Product();
+        product.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItemItemsActionPerformed
+
+    private void jMenuItemHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHistoryActionPerformed
+        HistoryInventory history = new HistoryInventory();
+        history.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItemHistoryActionPerformed
+
+        private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
+                // TODO add your handling code here:
+        }// GEN-LAST:event_jTextField1ActionPerformed
+
+        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+                // TODO add your handling code here:
+        }// GEN-LAST:event_jButton1ActionPerformed
+
+        /**
+         * @param args the command line arguments
+=======
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         double total = 0;
         for (int i = 0; i < jTable4.getRowCount(); i++) {
@@ -451,33 +543,50 @@ public class Home1 extends javax.swing.JFrame {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+>>>>>>> 21ca68fa1c67fe1f100f09967fc2e7cf59a722e0:src/main/java/com/tugasakhir_pbo/pages/Home1.java
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        public static void main(String args[]) {
+                /* Set the Nimbus look and feel */
+                // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+                // (optional) ">
+                /*
+                 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+                 * look and feel.
+                 * For details see
+                 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+                 */
+                try {
+                        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
+                                        .getInstalledLookAndFeels()) {
+                                if ("Nimbus".equals(info.getName())) {
+                                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                                        break;
+                                }
+                        }
+                } catch (ClassNotFoundException ex) {
+                        java.util.logging.Logger.getLogger(Home1.class.getName()).log(java.util.logging.Level.SEVERE,
+                                        null, ex);
+                } catch (InstantiationException ex) {
+                        java.util.logging.Logger.getLogger(Home1.class.getName()).log(java.util.logging.Level.SEVERE,
+                                        null, ex);
+                } catch (IllegalAccessException ex) {
+                        java.util.logging.Logger.getLogger(Home1.class.getName()).log(java.util.logging.Level.SEVERE,
+                                        null, ex);
+                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                        java.util.logging.Logger.getLogger(Home1.class.getName()).log(java.util.logging.Level.SEVERE,
+                                        null, ex);
                 }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                // </editor-fold>
+
+                /* Create and display the form */
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                        public void run() {
+                                new Home1().setVisible(true);
+                        }
+                });
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home1().setVisible(true);
-            }
-        });
-    }
-
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addItemsBtn;
     private javax.swing.JButton jButton1;
@@ -491,6 +600,13 @@ public class Home1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+<<<<<<< HEAD
+=======
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuItemHistory;
+    private javax.swing.JMenu jMenuItemHome;
+    private javax.swing.JMenu jMenuItemItems;
+>>>>>>> 825784f60ebf2641838eb3ad1a6069ca0785686c
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
