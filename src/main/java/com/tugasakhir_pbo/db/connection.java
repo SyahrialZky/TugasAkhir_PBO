@@ -1,4 +1,4 @@
-package nocompany.tugasakhir_pbo.db;
+package com.tugasakhir_pbo.db;
 import java.sql.*;
 
 public class connection {
