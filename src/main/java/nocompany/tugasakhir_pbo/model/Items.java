@@ -1,6 +1,6 @@
-package com.tugasakhir_pbo.model;
+package nocompany.tugasakhir_pbo.model;
 
-import com.tugasakhir_pbo.db.connection;
+import nocompany.tugasakhir_pbo.db.connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Item {
+public class Items {
     private int id;
     private String name;
     private int stock;
     private int price;
 
-    public Item(int id, String name, int stock, int price) {
+    public Items(int id, String name, int stock, int price) {
         this.id = id;
         this.name = name;
         this.stock = stock;
@@ -38,8 +38,8 @@ public class Item {
     }
 
     // get items from database
-    public static List<Item> getAllItems() {
-        List<Item> itemsList = new ArrayList<>();
+    public static List<Items> getAllItems() {
+        List<Items> itemsList = new ArrayList<>();
         String query = "SELECT * FROM items";
 
         try (Connection conn = connection.getConnection(); // Adjusted to match your package
@@ -52,7 +52,7 @@ public class Item {
                 int stock = rs.getInt("stock");
                 int price = rs.getInt("price");
 
-                Item item = new Item(id, name, stock, price);
+                Items item = new Items(id, name, stock, price);
                 itemsList.add(item);
             }
         } catch (SQLException e) {
@@ -67,6 +67,7 @@ public class Item {
         return "Item: " + name + ", Stock: " + stock + ", Price: " + price;
     }
 
+    // Test get items with main method
 //    public static void main(String[] args) {
 //        List<Items> items = getAllItems();
 //        for (Items item : items) {
