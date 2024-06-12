@@ -2,9 +2,9 @@ package com.tugasakhir_pbo.db;
 import java.sql.*;
 
 public class connection {
-    private static final String URL = "jdbc:mysql://localhost:3306/kasir-java";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "";
+    private static final String URL = "jdbc:mysql://localhost:3306/pbo";
+    private static final String USERNAME = "bilal";
+    private static final String PASSWORD = "bilal123";
 
     public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);

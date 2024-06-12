@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Items {
+public class Item {
     private int id;
     private String name;
     private int stock;
     private int price;
 
-    public Items(int id, String name, int stock, int price) {
+    public Item(int id, String name, int stock, int price) {
         this.id = id;
         this.name = name;
         this.stock = stock;
@@ -38,8 +38,8 @@ public class Items {
     }
 
     // get items from database
-    public static List<Items> getAllItems() {
-        List<Items> itemsList = new ArrayList<>();
+    public static List<Item> getAllItems() {
+        List<Item> itemsList = new ArrayList<>();
         String query = "SELECT * FROM items";
 
         try (Connection conn = connection.getConnection(); // Adjusted to match your package
@@ -52,7 +52,7 @@ public class Items {
                 int stock = rs.getInt("stock");
                 int price = rs.getInt("price");
 
-                Items item = new Items(id, name, stock, price);
+                Item item = new Item(id, name, stock, price);
                 itemsList.add(item);
             }
         } catch (SQLException e) {
@@ -67,7 +67,6 @@ public class Items {
         return "Item: " + name + ", Stock: " + stock + ", Price: " + price;
     }
 
-    // Test get items with main method
 //    public static void main(String[] args) {
 //        List<Items> items = getAllItems();
 //        for (Items item : items) {
