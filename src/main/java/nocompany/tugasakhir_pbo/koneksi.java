@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class koneksi {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/kasir-java";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "";
+    private static final String USERNAME = "bilal";
+    private static final String PASSWORD = "bilal123";
 
     private static Connection connection;
 
