@@ -1,4 +1,4 @@
-package nocompany.tugasakhir_pbo;
+package nocompany.tugasakhir_pbo.pages;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
