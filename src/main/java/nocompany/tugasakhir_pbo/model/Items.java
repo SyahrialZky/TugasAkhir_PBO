@@ -43,8 +43,8 @@ public class Items {
         String query = "SELECT * FROM items";
 
         try (Connection conn = connection.getConnection(); // Adjusted to match your package
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -61,21 +61,21 @@ public class Items {
 
         return itemsList;
     }
-    
-     public static void updateStock(String itemName, int additionalStock) throws SQLException {
+
+    public static void updateStock(String itemName, int additionalStock) throws SQLException {
         String sqlUpdateStock = "UPDATE items SET stock = stock + ? WHERE name = ?";
         try (Connection conn = connection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sqlUpdateStock)) {
+                PreparedStatement stmt = conn.prepareStatement(sqlUpdateStock)) {
             stmt.setInt(1, additionalStock);
             stmt.setString(2, itemName);
             stmt.executeUpdate();
         }
     }
-     
-     public static void deleteItem(String itemName) throws SQLException {
+
+    public static void deleteItem(String itemName) throws SQLException {
         String sqlDelete = "DELETE FROM items WHERE name = ?";
         try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sqlDelete)) {
+                PreparedStatement statement = connection.prepareStatement(sqlDelete)) {
             statement.setString(1, itemName);
             statement.executeUpdate();
         }
@@ -87,10 +87,10 @@ public class Items {
     }
 
     // Test get items with main method
-//    public static void main(String[] args) {
-//        List<Items> items = getAllItems();
-//        for (Items item : items) {
-//            System.out.println(item.getItemDetails());
-//        }
-//    }
+    // public static void main(String[] args) {
+    // List<Items> items = getAllItems();
+    // for (Items item : items) {
+    // System.out.println(item.getItemDetails());
+    // }
+    // }
 }
