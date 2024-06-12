@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import nocompany.tugasakhir_pbo.db.connection;
+import nocompany.tugasakhir_pbo.model.Users;
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -126,30 +127,19 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldPasswordActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        String email = fieldEmail.getText();
+         String email = fieldEmail.getText();
         String password = new String(fieldPassword.getPassword());
         
-          try (Connection conn = connection.getConnection()) {
-            String query = "SELECT * FROM user WHERE email = ? AND password = ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(this, "Login successful!");
-                Home1 home = new Home1();
-                home.setVisible(true);
-                // Lakukan tindakan setelah login berhasil, seperti membuka jendela baru
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid email or password.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Database connection error.", "Error", JOptionPane.ERROR_MESSAGE);
+        Users user = Users.authenticate(email, password);
+        if (user != null) {
+            JOptionPane.showMessageDialog(this, "Login successful!");
+            Home1 home = new Home1();
+            home.setVisible(true);
+            // Lakukan tindakan setelah login berhasil, seperti membuka jendela baru
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid email or password.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-          this.dispose();
+        this.dispose();
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void fieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldEmailActionPerformed

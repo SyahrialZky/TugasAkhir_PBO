@@ -13,7 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import nocompany.tugasakhir_pbo.pages.Product;
+import nocompany.tugasakhir_pbo.model.Items;
 
 public class AddStock extends javax.swing.JFrame {
 
@@ -117,13 +119,15 @@ public class AddStock extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addStockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStockButtonActionPerformed
-         String selectedItem = (String) dropdownProduct.getSelectedItem();
+        String selectedItem = (String) dropdownProduct.getSelectedItem();
         int additionalStock = Integer.parseInt(textFieldJumlah.getText());
 
-        // Update stock in database
-        updateStock(selectedItem, additionalStock);
-
-       
+        // Update stock using Items class
+        try {
+            Items.updateStock(selectedItem, additionalStock);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // Clear form fields
         dropdownProduct.setSelectedIndex(0); // Reset combo box selection
@@ -177,29 +181,23 @@ public class AddStock extends javax.swing.JFrame {
     
      private void populateComboBox() {
         // Code to populate the combo box with item names from the database
-        String query = "SELECT name FROM item";
-        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                dropdownProduct.addItem(resultSet.getString("name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+         List<Items> itemsList = Items.getAllItems();
+        for (Items item : itemsList) {
+            dropdownProduct.addItem(item.getName());
         }
      }
      
-      private void updateStock(String itemName, int additionalStock) {
-        String query = "UPDATE item SET qty = qty + ? WHERE name = ?";
-        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, additionalStock);
-            statement.setString(2, itemName);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//      private void updateStock(String itemName, int additionalStock) {
+//        String query = "UPDATE item SET qty = qty + ? WHERE name = ?";
+//        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
+//             PreparedStatement statement = connection.prepareStatement(query)) {
+//            statement.setInt(1, additionalStock);
+//            statement.setString(2, itemName);
+//            statement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addStockButton;

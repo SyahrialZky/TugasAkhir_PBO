@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import nocompany.tugasakhir_pbo.model.Inventories;
 /**
  *
  * @author Lenovo
@@ -156,7 +157,7 @@ public class AddProduct extends javax.swing.JFrame {
         
         try (Connection conn = nocompany.tugasakhir_pbo.db.connection.getConnection()) {
             // Add item to item table
-            String sqlItem = "INSERT INTO item (name, qty, price) VALUES (?, ?, ?)";
+            String sqlItem = "INSERT INTO items (name, stock, price) VALUES (?, ?, ?)";
             PreparedStatement pstmtItem = conn.prepareStatement(sqlItem, Statement.RETURN_GENERATED_KEYS); // Request generated key
             pstmtItem.setString(1, nama);
             pstmtItem.setInt(2, jumlah);
@@ -164,23 +165,18 @@ public class AddProduct extends javax.swing.JFrame {
             pstmtItem.executeUpdate();
 
             // Get the newly added item's ID
-            ResultSet generatedKeys = pstmtItem.getGeneratedKeys();
-            generatedKeys.next(); // Move to the first (and likely only) row
-            int itemId = generatedKeys.getInt(1); // Get the ID from the first column
+              ResultSet generatedKeys = pstmtItem.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int itemId = generatedKeys.getInt(1); // Get the ID from the first column
 
-            // Add history record to history_add_item table
-            String sqlHistory = "INSERT INTO history_add_item (item_id, quantity, added_date) VALUES (?, ?, ?)";
-            PreparedStatement pstmtHistory = conn.prepareStatement(sqlHistory);
+                // Add inventory record using Inventories model
+                String status = "barang masuk";
+                Inventories.addInventory(itemId, jumlah, status);
 
-            pstmtHistory.setInt(1, itemId); // Use the retrieved item ID
-            pstmtHistory.setInt(2, jumlah);  // Quantity added
-            pstmtHistory.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis())); // Current timestamp
-
-            pstmtHistory.executeUpdate();
-
-            JOptionPane.showMessageDialog(this, "Product berhasil ditambahkan");
-
-            // ... existing code ...
+                JOptionPane.showMessageDialog(this, "Product berhasil ditambahkan");
+            } else {
+                throw new SQLException("Creating item failed, no ID obtained.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Gagal menambahkan product");

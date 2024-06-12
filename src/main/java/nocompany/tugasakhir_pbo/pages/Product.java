@@ -13,9 +13,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import nocompany.tugasakhir_pbo.AddStock;
+import nocompany.tugasakhir_pbo.model.Items;
 
 public class Product extends javax.swing.JFrame {
 
@@ -59,7 +62,7 @@ public class Product extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -67,6 +70,7 @@ public class Product extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         addProductButton = new javax.swing.JButton();
         updateStockButton = new javax.swing.JButton();
+        deleteProductButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -75,16 +79,17 @@ public class Product extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tableProduct.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null }
-                },
-                new String[] {
-                        "No", "Nama", "Stock", "Harga"
-                }));
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "No", "Nama", "Stock", "Harga"
+            }
+        ));
         jScrollPane1.setViewportView(tableProduct);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -104,6 +109,13 @@ public class Product extends javax.swing.JFrame {
             }
         });
 
+        deleteProductButton.setText("Hapus");
+        deleteProductButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteProductButtonActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Home");
         jMenuBar1.add(jMenu1);
 
@@ -118,42 +130,59 @@ public class Product extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 488,
-                                        Short.MAX_VALUE)
-                                .addComponent(addProductButton)
-                                .addGap(27, 27, 27)
-                                .addComponent(updateStockButton)
-                                .addContainerGap(62, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(484, 484, 484)
+                        .addComponent(addProductButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(updateStockButton)
+                        .addGap(13, 13, 13)
+                        .addComponent(deleteProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(addProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, 43,
-                                                Short.MAX_VALUE)
-                                        .addComponent(updateStockButton, javax.swing.GroupLayout.DEFAULT_SIZE, 43,
-                                                Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(245, 245, 245)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateStockButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(245, 245, 245))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_addProductButtonActionPerformed
+    private void deleteProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProductButtonActionPerformed
+        int selectedRow = tableProduct.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select an item to delete.");
+            return;
+        }
+
+        String itemName = tableProduct.getValueAt(selectedRow, 1).toString();
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + itemName + "?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                Items.deleteItem(itemName);
+                loadDataToTable(); // Refresh the table
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_deleteProductButtonActionPerformed
+
+    private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) { // GEN-FIRST:event_addProductButtonActionPerformed
         // TODO add your handling code here:
         new AddProduct().setVisible(true);
         this.dispose();
@@ -207,6 +236,7 @@ public class Product extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addProductButton;
+    private javax.swing.JButton deleteProductButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -218,35 +248,31 @@ public class Product extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadDataToTable() {
-        DefaultTableModel model = (DefaultTableModel) tableProduct.getModel();
+          DefaultTableModel model = (DefaultTableModel) tableProduct.getModel();
         model.setRowCount(0);
 
-        String query = "SELECT * FROM item";
-        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query);
-                ResultSet resultSet = statement.executeQuery()) {
-            int no = 1;
-            while (resultSet.next()) {
-                Object[] row = new Object[4];
-                row[0] = no++;
-                row[1] = resultSet.getString("name");
-                row[2] = resultSet.getInt("qty");
-                row[3] = resultSet.getDouble("price");
-                model.addRow(row);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        List<Items> itemsList = Items.getAllItems();
+        int no = 1;
+        for (Items item : itemsList) {
+            Object[] row = new Object[4];
+            row[0] = no++;
+            row[1] = item.getName();
+            row[2] = item.getStock();
+            row[3] = item.getPrice();
+            model.addRow(row);
         }
     }
 
-    private void updateStock(int itemId, int newStock) throws SQLException {
-        String sqlUpdateStock = "UPDATE item SET jumlah = ? WHERE item_id = ?";
-        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlUpdateStock)) {
-            statement.setInt(1, newStock);
-            statement.setInt(2, itemId);
-            statement.executeUpdate();
-        }
-    }
+//    private void updateStock(int itemId, int newStock) throws SQLException {
+//        String sqlUpdateStock = "UPDATE item SET jumlah = ? WHERE item_id = ?";
+//        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
+//                PreparedStatement statement = connection.prepareStatement(sqlUpdateStock)) {
+//            statement.setInt(1, newStock);
+//            statement.setInt(2, itemId);
+//            statement.executeUpdate();
+//        }
+//    }
+    
+    
 
 }
