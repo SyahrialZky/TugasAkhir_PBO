@@ -8,6 +8,8 @@ package nocompany.tugasakhir_pbo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 /**
  *
@@ -137,27 +139,38 @@ public class AddProduct extends javax.swing.JFrame {
         int jumlah = Integer.parseInt(fieldJumlah.getText());
         double harga = Double.parseDouble(fieldHarga.getText());
         
-        try (Connection conn = koneksi.getConnection()) {
-            // Buat SQL query
-            String sql = "INSERT INTO item (item_name, jumlah, price) VALUES (?, ?, ?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, nama);
-            pstmt.setInt(2, jumlah);
-            pstmt.setDouble(3, harga);
+        try (Connection conn = nocompany.tugasakhir_pbo.db.connection.getConnection()) {
+            // Add item to item table
+            String sqlItem = "INSERT INTO item (name, qty, price) VALUES (?, ?, ?)";
+            PreparedStatement pstmtItem = conn.prepareStatement(sqlItem, Statement.RETURN_GENERATED_KEYS); // Request generated key
+            pstmtItem.setString(1, nama);
+            pstmtItem.setInt(2, jumlah);
+            pstmtItem.setDouble(3, harga);
+            pstmtItem.executeUpdate();
 
-            // Eksekusi query
-            pstmt.executeUpdate();
+            // Get the newly added item's ID
+            ResultSet generatedKeys = pstmtItem.getGeneratedKeys();
+            generatedKeys.next(); // Move to the first (and likely only) row
+            int itemId = generatedKeys.getInt(1); // Get the ID from the first column
+
+            // Add history record to history_add_item table
+            String sqlHistory = "INSERT INTO history_add_item (item_id, quantity, added_date) VALUES (?, ?, ?)";
+            PreparedStatement pstmtHistory = conn.prepareStatement(sqlHistory);
+
+            pstmtHistory.setInt(1, itemId); // Use the retrieved item ID
+            pstmtHistory.setInt(2, jumlah);  // Quantity added
+            pstmtHistory.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis())); // Current timestamp
+
+            pstmtHistory.executeUpdate();
+
             JOptionPane.showMessageDialog(this, "Product berhasil ditambahkan");
 
-            // Bersihkan field input
-            fieldNama.setText("");
-            fieldJumlah.setText("");
-            fieldHarga.setText("");
-
+            // ... existing code ...
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Gagal menambahkan product");
         }
+    
     }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
