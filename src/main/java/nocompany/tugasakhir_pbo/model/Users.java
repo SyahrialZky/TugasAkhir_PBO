@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package nocompany.tugasakhir_pbo.model;
+
 import nocompany.tugasakhir_pbo.db.connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,15 +20,14 @@ public class Users {
     private String password;
     private String email;
 
-
- public Users(int user_id, String username, String password, String email) {
+    public Users(int user_id, String username, String password, String email) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
         this.email = email;
     }
- 
- public int getUserId() {
+
+    public int getUserId() {
         return user_id;
     }
 
@@ -40,14 +40,14 @@ public class Users {
     }
 
     public String getEmail() {
-        return email ;
+        return email;
     }
-    
+
     // get items from database
-     public static Users authenticate(String email, String password) {
+    public static Users authenticate(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
         try (Connection conn = connection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+                PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();

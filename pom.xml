@@ -21,7 +21,11 @@
     <artifactId>mysql-connector-j</artifactId>
     <version>8.4.0</version>
 </dependency>
-
+    <dependency>
+        <groupId>overide</groupId>
+        <artifactId>SecurityPlanners</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 </dependencies>
 
     

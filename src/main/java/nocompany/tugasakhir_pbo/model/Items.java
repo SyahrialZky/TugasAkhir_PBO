@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Items {
+
     private int id;
     private String name;
     private int stock;
@@ -43,8 +44,7 @@ public class Items {
         String query = "SELECT * FROM items";
 
         try (Connection conn = connection.getConnection(); // Adjusted to match your package
-                PreparedStatement stmt = conn.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery()) {
+                 PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -64,8 +64,7 @@ public class Items {
 
     public static void updateStock(String itemName, int additionalStock) throws SQLException {
         String sqlUpdateStock = "UPDATE items SET stock = stock + ? WHERE name = ?";
-        try (Connection conn = connection.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sqlUpdateStock)) {
+        try (Connection conn = connection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sqlUpdateStock)) {
             stmt.setInt(1, additionalStock);
             stmt.setString(2, itemName);
             stmt.executeUpdate();
@@ -74,8 +73,7 @@ public class Items {
 
     public static void deleteItem(String itemName) throws SQLException {
         String sqlDelete = "DELETE FROM items WHERE name = ?";
-        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection();
-                PreparedStatement statement = connection.prepareStatement(sqlDelete)) {
+        try (Connection connection = nocompany.tugasakhir_pbo.db.connection.getConnection(); PreparedStatement statement = connection.prepareStatement(sqlDelete)) {
             statement.setString(1, itemName);
             statement.executeUpdate();
         }
