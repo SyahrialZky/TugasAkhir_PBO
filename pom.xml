@@ -12,21 +12,14 @@
         <exec.mainClass>nocompany.tugasakhir_pbo.pages.Login</exec.mainClass>
     </properties>
   
-  
-  
-<dependencies>
-    <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
-<dependency>
-    <groupId>com.mysql</groupId>
-    <artifactId>mysql-connector-j</artifactId>
-    <version>8.4.0</version>
-</dependency>
-    <dependency>
-        <groupId>overide</groupId>
-        <artifactId>SecurityPlanners</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-</dependencies>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.4.0</version>
+        </dependency>
+    </dependencies>
 
     
 </project>
