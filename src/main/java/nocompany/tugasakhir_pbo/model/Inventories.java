@@ -21,12 +21,14 @@ public class Inventories {
 
     private int history_id;
     private int item_id;
+    private String status;
     private int quantity;
     private Date added_date = new Date();
 
-    public Inventories(int history_id, int item_id, int quantity, Date added_date) {
+    public Inventories(int history_id, int item_id, String status ,int quantity, Date added_date) {
         this.history_id = history_id;
         this.item_id = item_id;
+        this.status = status;
         this.quantity = quantity;
         this.added_date = added_date;
     }
@@ -37,6 +39,9 @@ public class Inventories {
 
     public int getItemId() {
         return item_id;
+    }
+    public String getStatus(){
+        return status;
     }
 
     public int getQuantity() {
@@ -58,10 +63,10 @@ public class Inventories {
             while (rs.next()) {
                 int history_id = rs.getInt("history_id");
                 int item_id = rs.getInt("item_id");
+                String status = rs.getString("status");
                 int quantity = rs.getInt("quantity");
                 Date added_date = rs.getDate("added_date");
-
-                Inventories inventory = new Inventories(history_id, item_id, quantity, added_date);
+                Inventories inventory = new Inventories(history_id, item_id, status ,quantity, added_date);
                 inventoryList.add(inventory);
             }
         } catch (SQLException e) {

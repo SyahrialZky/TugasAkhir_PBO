@@ -27,6 +27,7 @@ import nocompany.tugasakhir_pbo.model.Inventories;
 public class Home1 extends javax.swing.JFrame {
 
     List<String> addedItems = new ArrayList<>();
+    private static Home1 instance;
 
     /**
      * Creates new form Home1
@@ -48,6 +49,12 @@ public class Home1 extends javax.swing.JFrame {
             Object[] row = {item.getName(), item.getStock(), item.getPrice()};
             model.addRow(row);
         }
+    }
+     public static Home1 getInstance() {
+        if (instance == null) {
+            instance = new Home1();
+        }
+        return instance;
     }
 
     /**
@@ -430,12 +437,19 @@ public class Home1 extends javax.swing.JFrame {
 // Create transaction
         boolean success = Transaction.createTransaction(details, payment);
         if (success) {
+            model.setRowCount(0);
             jTextField1.setText(Integer.toString(totalAmount));
             jTextField3.setText(Integer.toString(changeAmount));
             JOptionPane.showMessageDialog(this, "Transaction saved successfully.");
-            Transaction transaction = new Transaction(totalAmount);
-            String transactionDetails = transaction.toString(); // Memanggil metode toString()
-            JOptionPane.showMessageDialog(this, "Transaction details:\n" + transactionDetails, "Transaction Details", JOptionPane.INFORMATION_MESSAGE);
+//            Transaction transaction = new Transaction(totalAmount);
+//            String transactionDetails = transaction.toString(); // Memanggil metode toString()
+            Struk struk = new Struk(details, totalAmount, payment, changeAmount);
+            String strukText = struk.generateStrukText();
+            JOptionPane.showMessageDialog(this, "Transaction details:\n" + strukText, "Transaction Details", JOptionPane.INFORMATION_MESSAGE);
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            populateItemsTable();
         } else {
             JOptionPane.showMessageDialog(this, "Failed to save transaction.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -567,6 +581,21 @@ public class Home1 extends javax.swing.JFrame {
             jTextField3.setText("");
         }
     }
+       private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        Home1 homeFrame = Home1.getInstance();
+        homeFrame.setVisible(true);
+        this.dispose();  // Sembunyikan window utama
+    }
+        private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        Product productFrame = new Product();
+        productFrame.setVisible(true);
+        this.dispose();  // Sembunyikan window utama
+    }
+        private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+        History historyFrame = new History();
+        historyFrame.setVisible(true);
+        this.dispose();  // Sembunyikan window utama
+    }
 
     /**
      * @param args the command line arguments
@@ -601,6 +630,7 @@ public class Home1 extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Home1().setVisible(true);
             }

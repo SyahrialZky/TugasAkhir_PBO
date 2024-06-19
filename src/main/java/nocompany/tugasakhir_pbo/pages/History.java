@@ -31,7 +31,8 @@ public class History extends javax.swing.JFrame {
 
         for (Inventories inventory : inventoryList) {
             String itemName = Inventories.getItemNameById(inventory.getItemId());
-            String status = "barang masuk"; // Asumsi status tetap sama
+//            String status = "barang masuk"; // Asumsi status tetap sama
+            String status = inventory.getStatus();
             int quantity = inventory.getQuantity();
             Date addedDate = (Date) inventory.getAddedDate();
 

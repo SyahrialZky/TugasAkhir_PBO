@@ -176,8 +176,8 @@ public class AddProduct extends javax.swing.JFrame {
                 int itemId = generatedKeys.getInt(1); // Get the ID from the first column
 
                 // Add inventory record using Inventories model
-                String status = "barang masuk";
-                Inventories.addInventory(itemId, jumlah, status);
+                String status ;
+                Inventories.addInventory(itemId, jumlah, "barang masuk");
 
                 JOptionPane.showMessageDialog(this, "Product berhasil ditambahkan");
             } else {
