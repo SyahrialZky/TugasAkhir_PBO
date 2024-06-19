@@ -8,28 +8,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
+import nocompany.tugasakhir_pbo.model.DetailTransaction;
 
-public class Transaction {
+public class Transaction extends Object {
     private int id;
     private Date date;
     private int totalAmount;
 
-    public Transaction(int id, Date date, int totalAmount) {
-        this.id = id;
-        this.date = date;
+    // Constructor
+   public Transaction( int totalAmount) {
         this.totalAmount = totalAmount;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public int getTotalAmount() {
-        return totalAmount;
     }
 
     public static boolean createTransaction(List<DetailTransaction> details, int payment) {
@@ -97,22 +85,15 @@ public class Transaction {
         }
     }
 
-    // Main method for testing
-    public static void main(String[] args) {
-        List<DetailTransaction> details = List.of(
-            new DetailTransaction("Item1", 100, 2, 1),
-            new DetailTransaction("Item2", 200, 1, 2)
-        );
-        int payment = 500; // Example payment
-        boolean success = createTransaction(details, payment);
-        if (success) {
-            System.out.println("Transaction created successfully. Change: " + (payment - getTotalAmount(details)));
-        } else {
-            System.out.println("Failed to create transaction.");
-        }
-    }
-
     private static int getTotalAmount(List<DetailTransaction> details) {
         return details.stream().mapToInt(detail -> detail.getPrice() * detail.getQty()).sum();
+    }
+
+    // Override toString method
+    @Override
+    public String toString() {
+        return "Transaction sebesar : " +
+                 + totalAmount + " Berhasil " +
+                '}';
     }
 }

@@ -4,9 +4,12 @@
  */
 package nocompany.tugasakhir_pbo.pages;
 
+import nocompany.tugasakhir_pbo.model.Transaction;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import nocompany.tugasakhir_pbo.model.Items;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +19,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import nocompany.tugasakhir_pbo.model.DetailTransaction;
 import nocompany.tugasakhir_pbo.model.Inventories;
-import nocompany.tugasakhir_pbo.model.Transaction;
 
 /**
  *
@@ -431,10 +433,12 @@ public class Home1 extends javax.swing.JFrame {
             jTextField1.setText(Integer.toString(totalAmount));
             jTextField3.setText(Integer.toString(changeAmount));
             JOptionPane.showMessageDialog(this, "Transaction saved successfully.");
+            Transaction transaction = new Transaction(totalAmount);
+            String transactionDetails = transaction.toString(); // Memanggil metode toString()
+            JOptionPane.showMessageDialog(this, "Transaction details:\n" + transactionDetails, "Transaction Details", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Failed to save transaction.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
