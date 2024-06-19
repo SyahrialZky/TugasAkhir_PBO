@@ -62,10 +62,9 @@ public class Items {
         return itemsList;
     }
 
-     public static int getItemIdByName(String itemName) throws SQLException {
+    public static int getItemIdByName(String itemName) throws SQLException {
         String sql = "SELECT id FROM items WHERE name = ?";
-        try (Connection conn = connection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = connection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, itemName);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
@@ -76,13 +75,22 @@ public class Items {
             }
         }
     }
-     
+
     public static void updateStock(String itemName, int additionalStock) throws SQLException {
         String sqlUpdateStock = "UPDATE items SET stock = stock + ? WHERE name = ?";
         try (Connection conn = connection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sqlUpdateStock)) {
             stmt.setInt(1, additionalStock);
             stmt.setString(2, itemName);
             stmt.executeUpdate();
+        }
+    }
+
+    public static void reduceStock(int itemId, int reduceAmount) throws SQLException {
+        String sql = "UPDATE items SET stock = stock - ? WHERE id = ?";
+        try (Connection conn = connection.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, reduceAmount);
+            pstmt.setInt(2, itemId);
+            pstmt.executeUpdate();
         }
     }
 

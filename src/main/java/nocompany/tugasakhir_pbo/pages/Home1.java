@@ -399,25 +399,24 @@ public class Home1 extends javax.swing.JFrame {
                 throw new IllegalArgumentException("Unsupported type for quantity: " + qtyObj.getClass());
             }
 
-            // Check and cast the type of itemId
-            Object itemIdObj = model.getValueAt(i, 3);
-            int transactionId;
-            if (itemIdObj instanceof Double) {
-                transactionId = ((Double) itemIdObj).intValue();
-            } else if (itemIdObj instanceof Integer) {
-                transactionId = (Integer) itemIdObj;
-            } else {
-                throw new IllegalArgumentException("Unsupported type for itemId: " + itemIdObj.getClass());
+            // Get itemId from name
+            int itemId;
+            try {
+                itemId = Items.getItemIdByName(name);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Failed to retrieve item ID: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
-            details.add(new DetailTransaction(name, price, qty, transactionId));
+            // Add to details list
+            details.add(new DetailTransaction(name, price, qty, itemId));
 
+            // Update inventory for items going out
             try {
-                int itemId = Items.getItemIdByName(name);
                 Inventories.addInventory(itemId, qty, "barang keluar");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Failed to update inventory: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                return; 
+                return;
             }
         }
 
@@ -435,6 +434,7 @@ public class Home1 extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Failed to save transaction.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
