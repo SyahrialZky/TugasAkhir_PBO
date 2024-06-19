@@ -62,6 +62,21 @@ public class Items {
         return itemsList;
     }
 
+     public static int getItemIdByName(String itemName) throws SQLException {
+        String sql = "SELECT id FROM items WHERE name = ?";
+        try (Connection conn = connection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, itemName);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                } else {
+                    throw new SQLException("Item not found: " + itemName);
+                }
+            }
+        }
+    }
+     
     public static void updateStock(String itemName, int additionalStock) throws SQLException {
         String sqlUpdateStock = "UPDATE items SET stock = stock + ? WHERE name = ?";
         try (Connection conn = connection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sqlUpdateStock)) {

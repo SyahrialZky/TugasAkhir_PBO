@@ -4,14 +4,18 @@
  */
 package nocompany.tugasakhir_pbo.pages;
 
+import java.sql.SQLException;
 import nocompany.tugasakhir_pbo.model.Items;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import nocompany.tugasakhir_pbo.model.DetailTransaction;
+import nocompany.tugasakhir_pbo.model.Inventories;
 import nocompany.tugasakhir_pbo.model.Transaction;
 
 /**
@@ -111,13 +115,13 @@ public class Home1 extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "name", "qty", "price", "action"
+                "name", "qty", "price"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
@@ -206,10 +210,9 @@ public class Home1 extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                        .addComponent(jTextField2)
-                        .addComponent(jTextField3)))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addComponent(jTextField2)
+                    .addComponent(jTextField3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -347,6 +350,8 @@ public class Home1 extends javax.swing.JFrame {
         );
 
         pack();
+
+        //add onchange function to get change
         jTextField2.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -366,7 +371,7 @@ public class Home1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-           // Gather data from jTable4
+        // Gather data from jTable4
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         List<DetailTransaction> details = new ArrayList<>();
         for (int i = 0; i < model.getRowCount(); i++) {
@@ -396,23 +401,32 @@ public class Home1 extends javax.swing.JFrame {
 
             // Check and cast the type of itemId
             Object itemIdObj = model.getValueAt(i, 3);
-            int itemId;
+            int transactionId;
             if (itemIdObj instanceof Double) {
-                itemId = ((Double) itemIdObj).intValue();
+                transactionId = ((Double) itemIdObj).intValue();
             } else if (itemIdObj instanceof Integer) {
-                itemId = (Integer) itemIdObj;
+                transactionId = (Integer) itemIdObj;
             } else {
                 throw new IllegalArgumentException("Unsupported type for itemId: " + itemIdObj.getClass());
             }
 
-            details.add(new DetailTransaction(name, price, qty, itemId));
+            details.add(new DetailTransaction(name, price, qty, transactionId));
+
+            try {
+                int itemId = Items.getItemIdByName(name);
+                Inventories.addInventory(itemId, qty, "barang keluar");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Failed to update inventory: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
         }
 
+// Calculate total amount, payment, and changeAmount
         int totalAmount = details.stream().mapToInt(detail -> detail.getPrice() * detail.getQty()).sum();
-
         int payment = Integer.parseInt(jTextField2.getText());
         int changeAmount = payment - totalAmount;
 
+// Create transaction
         boolean success = Transaction.createTransaction(details, payment);
         if (success) {
             jTextField1.setText(Integer.toString(totalAmount));
@@ -421,6 +435,7 @@ public class Home1 extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Failed to save transaction.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
